@@ -143,7 +143,30 @@ Inside that directory:
 | `PROJECT_MEMORY_KEY` | Override the `{project-key}` folder name. |
 | `PROJECT_MEMORY_DIR` | Use this directory **as** the project folder (full path to where JSON/MD live). |
 
+### If I “install again”, do I lose memory from other projects?
+
+**No — not from rebuilding or re-enabling the MCP.**
+
+- **`go build` / `go install` again** only updates the **executable**. It does **not** touch `~/.cursor/project-memory/` (or whatever `PROJECT_MEMORY_ROOT` points to).
+- **Editing Cursor MCP JSON** (path to the binary, `cwd`, `env`) does **not** delete stored JSON/MD files.
+- **Each codebase** keeps its own subdirectory `{project-key}/` (derived from the **absolute** workspace path). Other projects’ folders are left alone when you use or reinstall the server for one repo.
+
+**When you might see an empty memory (old data still on disk):**
+
+- **`PROJECT_MEMORY_KEY` or `PROJECT_MEMORY_DIR` changed** → the server reads/writes a **different** folder; previous data remains in the old folder until you delete it manually.
+- **Same project opened from a new path** (e.g. moved folder, new clone) → a **new** `{slug}-{hash}` key; the old key’s files are unchanged under `.cursor/project-memory/`.
+
+**What actually deletes history:** manually removing `~/.cursor/project-memory` or individual `{project-key}/` folders (or wiping the machine).
+
 ## Cursor MCP
+
+**Important workflow**
+
+1. **Install once per machine** — Install Go, then build or `go install` the **`mcp-memory`** binary (see [Build](#build)). You do **not** need to rebuild for every repo; the same binary can serve all projects.
+2. **Turn it on per project** — In Cursor, register the MCP server for each workspace (or use **User** MCP with `PROJECT_MEMORY_WORKSPACE` / per-project `mcp.json`) so **`cwd`** or **`env`** points at **that** project’s root. Memory files then live under `~/.cursor/project-memory/{key}/` **per project path**, not inside the git repo.
+3. **Rule per project** — Copy [`.cursor/rules/project-memory-mcp.mdc`](.cursor/rules/project-memory-mcp.mdc) into **each** repo’s `.cursor/rules/` and **adapt** it (tone, when to call tools, `alwaysApply` / `globs`) to how that team works. The rule is only guidance text; tuning it is expected.
+
+---
 
 1. Build or `go install` the **`mcp-memory`** binary (see [Build](#build)).
 2. In **Cursor → Settings → MCP** (or project `.cursor/mcp.json`), add a server whose **`command`** is the **absolute path** to that binary.
@@ -174,12 +197,12 @@ Optional `env`:
 
 ### Cursor rule (example — when to use the tools)
 
-The MCP only **exposes** tools; it does not force the model to call them. To get consistent behavior, add a **project rule**:
+The MCP only **exposes** tools; it does not force the model to call them. To get consistent behavior, add a **project rule** in **each** repository:
 
 - **In this repo:** [`.cursor/rules/project-memory-mcp.mdc`](.cursor/rules/project-memory-mcp.mdc) (already present).
-- **In another project:** copy that file to `your-project/.cursor/rules/project-memory-mcp.mdc` after you enable the MCP there.
+- **Elsewhere:** copy that file to `your-project/.cursor/rules/project-memory-mcp.mdc`, then **edit** it for that project’s needs (which tools, how often, transparency wording). Same install binary, new rule file per codebase if behaviors differ.
 
-Full copy/paste and tuning notes: [`.cursor/README.md`](.cursor/README.md).
+Details: [`.cursor/README.md`](.cursor/README.md).
 
 ## Claude Desktop
 

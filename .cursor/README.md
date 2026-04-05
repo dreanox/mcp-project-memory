@@ -1,5 +1,7 @@
 # Cursor integration (this repository)
 
+**Reminder:** install the **`mcp-memory` binary once** on your machine. For **each** project, point Cursor’s MCP `cwd` / `PROJECT_MEMORY_WORKSPACE` at that repo, then **copy and adapt** this rule file—do not assume one global rule fits every codebase.
+
 ## Example rule: `rules/project-memory-mcp.mdc`
 
 This file is a **template** you can reuse in **any project** where you enable the project-memory MCP.
