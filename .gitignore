@@ -1,0 +1,6 @@
+/bin/
+*.exe
+*.test
+
+# Local product spec — do not publish
+context.md
