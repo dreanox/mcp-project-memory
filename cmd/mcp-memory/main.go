@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/master/mcp-memory/internal/mcpapp"
-	"github.com/master/mcp-memory/internal/svc"
+	"github.com/dreanox/mcp-project-memory/internal/mcpapp"
+	"github.com/dreanox/mcp-project-memory/internal/svc"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 

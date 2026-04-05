@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/master/mcp-memory/internal/svc"
+	"github.com/dreanox/mcp-project-memory/internal/svc"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 

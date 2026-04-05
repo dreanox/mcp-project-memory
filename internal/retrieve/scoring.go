@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/master/mcp-memory/internal/models"
+	"github.com/dreanox/mcp-project-memory/internal/models"
 )
 
 // ScoredMemory pairs an entry with its relevance score.

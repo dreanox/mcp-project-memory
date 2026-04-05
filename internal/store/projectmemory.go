@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/master/mcp-memory/internal/models"
+	"github.com/dreanox/mcp-project-memory/internal/models"
 )
 
 const projectMemoryFile = "project-memory.json"

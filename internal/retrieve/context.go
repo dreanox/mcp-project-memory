@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/master/mcp-memory/internal/models"
-	"github.com/master/mcp-memory/internal/store"
-	"github.com/master/mcp-memory/internal/structure"
+	"github.com/dreanox/mcp-project-memory/internal/models"
+	"github.com/dreanox/mcp-project-memory/internal/store"
+	"github.com/dreanox/mcp-project-memory/internal/structure"
 )
 
 // ContextBundle is returned by get_context / pm context.

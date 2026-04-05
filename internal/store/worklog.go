@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/master/mcp-memory/internal/models"
+	"github.com/dreanox/mcp-project-memory/internal/models"
 )
 
 const workLogFile = "work-log.jsonl"
