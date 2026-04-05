@@ -1,0 +1,27 @@
+---
+description: Use the project-memory MCP for work log, durable memory, and structure maps
+alwaysApply: true
+---
+
+# Project Memory MCP
+
+This workspace is expected to have the **project-memory** MCP server enabled in Cursor (see [mcp-project-memory](https://github.com/dreanox/mcp-project-memory) README for install). If the server is disabled, skip these steps.
+
+## When to call tools
+
+| Situation | Tool |
+|-----------|------|
+| Starting a non-trivial task (feature, bug, refactor) | `get_context` with `query` = short summary of the goal |
+| Unclear where code lives, onboarding, cross-cutting change | `get_context` with `include_structure: true`, or `get_structure_for_request` with the user’s question |
+| User wants a structural overview only | `get_project_structure` (omit `focus` for global index + fragment list) |
+| After finishing a meaningful chunk of work | Offer `worklog_append` (summary, `tool`: `cursor`, `date` = today ISO) |
+| Stable facts (architecture, decision, pattern, anti-pattern) | `project_memory_add` after user confirms or asks to record |
+
+## Transparency (required)
+
+- After **every** successful call to this MCP, **tell the user** that project memory was used and **repeat the `notice`** field from the tool result verbatim or in plain language.
+
+## Hygiene
+
+- Use `memory_search` or `project_memory_list` before stating project-wide conventions so you do not contradict stored memory.
+- Do not fabricate entries; only `worklog_append` / `project_memory_add` when the user agrees or explicitly asks to save something.

@@ -172,6 +172,15 @@ Optional `env`:
 }
 ```
 
+### Cursor rule (example — when to use the tools)
+
+The MCP only **exposes** tools; it does not force the model to call them. To get consistent behavior, add a **project rule**:
+
+- **In this repo:** [`.cursor/rules/project-memory-mcp.mdc`](.cursor/rules/project-memory-mcp.mdc) (already present).
+- **In another project:** copy that file to `your-project/.cursor/rules/project-memory-mcp.mdc` after you enable the MCP there.
+
+Full copy/paste and tuning notes: [`.cursor/README.md`](.cursor/README.md).
+
 ## Claude Desktop
 
 Same `command` / `env` idea in `claude_desktop_config.json` under `mcpServers`.
